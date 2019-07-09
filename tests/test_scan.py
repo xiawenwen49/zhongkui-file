@@ -1,7 +1,10 @@
 import unittest
-from .test import MALWARE, RESULT
+from pathlib import Path
 from zhongkui.file.scan import (diecScan, ssdeepScan, exiftoolScan, tridScan,
                                 magicScan, pefileScan)
+
+MALWARE = Path(__file__).resolve().parent.joinpath("sample")
+RESULT = Path(__file__).resolve().parent.joinpath("result")
 
 
 class TestFileScan(unittest.TestCase):

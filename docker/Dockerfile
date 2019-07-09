@@ -75,11 +75,5 @@ WORKDIR /malware
 
 # ENTRYPOINT [ "/entrypoint.sh" ]
 
-# install zk-advanced
-COPY . /zhongkui
-
-RUN set -x \
-  && cd /zhongkui \
-  && pip install -e . -i https://pypi.mirrors.ustc.edu.cn/simple/
-
-CMD ["zhongkui", "--help"]
+# install zhongkui-file
+Run pip install zhongkui-file

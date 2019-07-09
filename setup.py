@@ -33,7 +33,8 @@ def open_local(paths, mode="r", encoding="utf8"):
     return codecs.open(path, mode, encoding)
 
 
-with open_local(["sanic", "__init__.py"], encoding="latin1") as fp:
+with open_local(["src/python/zhongkui/file", "__init__.py"],
+                encoding="latin1") as fp:
     try:
         version = re.findall(r"^__version__ = \"([^']+)\"\r?$", fp.read(),
                              re.M)[0]
@@ -46,15 +47,15 @@ setup(
     url="https://git.kongkongss.com/jyker/zhongkui-file",
     author="Kongkong Jiang",
     author_email="jyk.kongkong@gmail.com",
-    description="Zhongkui file package",
+    description="Zhongkui file utils package",
     keywords="Zhongkui file",
     license="MIT",
+    python_requires=">=3.7.3",
     packages=find_packages('src/python'),
     package_dir={'': 'src/python'},
     include_package_data=True,
     namespace_packages=['zhongkui'],
+    cmdclass={"test": PyTest},
     install_requires=[
-        "file-magic",
-        "pefile",
-        "pytest"
+        "file-magic >= 0.4.0", "pefile >= 2019.4.18", "pytest >= 5.0.1"
     ])

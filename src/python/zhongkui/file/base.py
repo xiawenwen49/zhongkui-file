@@ -87,19 +87,19 @@ class Storage:
         return filepath
 
     @staticmethod
-    def delete(folder: Path):
-        # if Path(file).exists():
-        #     try:
-        #         os.remove(file)
-        #     except OSError:
-        #         raise ZhongkuiCriticalError(
-        #             "Unable to delete file: {}".format(file))
-        if Path(folder).exists():
+    def delete(file: Path):
+        if Path(file).exists():
             try:
-                shutil.rmtree(folder)
+                os.remove(file)
             except OSError:
                 raise ZhongkuiCriticalError(
-                    "Unable to delete folder: {}".format(folder))
+                    "Unable to delete file: {}".format(file))
+        # if Path(folder).exists():
+        #     try:
+        #         shutil.rmtree(folder)
+        #     except OSError:
+        #         raise ZhongkuiCriticalError(
+        #             "Unable to delete folder: {}".format(folder))
 
     @staticmethod
     def copy(path_target: Path, path_dest: Path) -> Path:
@@ -315,17 +315,17 @@ class File(Storage):
 
     def getDiec(self):
         """diec info"""
-        if not self._diec_info:
-            self._diec_info = diecScan(self.file_path)
+        if not self._diec:
+            self._diec = diecScan(self.file_path)
 
-        return self._diec_info
+        return self._diec
 
     def getBasicInfo(self):
         """file basic info"""
-        if self._basic_info is None:
+        if self._basic is None:
             # basic info
             basic_info = FileinfoBasic()
-            basic_info.name = self.name
+            basic_info.name = self.fileName
             basic_info.md5 = self.md5
             basic_info.sha256 = self.sha256
             basic_info.crc32 = self.crc32
@@ -337,9 +337,9 @@ class File(Storage):
             basic_info.isProbablyPacked = self.isProbablyPacked
             basic_info.fileSize = self.getExiftool().get(EXIFTOOL.FILESIZE)
             # basic_info.familyType = self.family_type
-            self._basic_info = asdict(basic_info)
+            self._basic = asdict(basic_info)
 
-        return self._basic_info
+        return self._basic
 
     def getAllInfo(self) -> Dict[str, Any]:
         """file all info"""
@@ -348,3 +348,5 @@ class File(Storage):
         infos[STATICINFO.PE] = self.getPefile()
         infos[STATICINFO.DIEC] = self.getDiec()
         infos[STATICINFO.EXIFTOOL] = self.getExiftool()
+
+        return infos

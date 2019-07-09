@@ -2,8 +2,10 @@ import unittest
 import tempfile
 import json
 from pathlib import Path
-from .test import MALWARE, RESULT
 from zhongkui.file.base import File, Storage
+
+MALWARE = Path(__file__).resolve().parent.joinpath("sample")
+RESULT = Path(__file__).resolve().parent.joinpath("result")
 
 
 class TestStorage(unittest.TestCase):
@@ -33,5 +35,6 @@ class TestFile(unittest.TestCase):
 
     def test_getAllInfo(self):
         result = self.file.getAllInfo()
+        assert result is not None
         with open(RESULT.joinpath("fileInfo.json"), "w") as f:
             json.dump(result, f)
