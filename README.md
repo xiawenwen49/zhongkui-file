@@ -72,6 +72,12 @@ $ pytest
 ## Versioning
 latest version is avaiable in [pypi](https://pypi.org/project/zhongkui-file/)
 
+## TODOs
+
+- add `pyelftools` to calculate `section` entropy of `elf`
+- parse `apk`
+- parse `elf`
+
 ## Authors
 
 * **kongkong Jiang** - *Initial work* - [jyker](https://git.kongkongss.com/jyker)
