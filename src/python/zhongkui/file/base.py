@@ -8,9 +8,10 @@ from pathlib import Path
 from collections import Counter
 from dataclasses import asdict
 from typing import Dict, Any
-from .exceptions import ZhongkuiCriticalError, ZhongkuiOperationalError
-from .model import (MAGIC, DIEC, PEFILE, FILETYPE, EXIFTOOL, FileinfoBasic)
-from .core import (exiftoolScan, ssdeepScan, magicScan, pefileScan, tridScan,
+from .exceptions import ZhongkuiCriticalError
+from .model import (DIEC, PEFILE, FILETYPE, EXIFTOOL, STATICINFO,
+                    FileinfoBasic)
+from .scan import (exiftoolScan, ssdeepScan, magicScan, pefileScan, tridScan,
                    diecScan)
 
 FILE_CHUNK_SIZE = 16 * 1024 * 1024
@@ -28,9 +29,9 @@ def temppath():
 
 class Storage:
     @staticmethod
-    def getFileNameFromPath(path: Path) -> str:
+    def getFilenameFromPath(path: Path) -> str:
         return Path(path).name
-
+        
     @staticmethod
     def tempPut(content, path: Path = None) -> Path:
         """Store a temporary file or files.
@@ -103,9 +104,6 @@ class Storage:
     @staticmethod
     def copy(path_target: Path, path_dest: Path) -> Path:
         """Copy a file. The destination may be a directory.
-        Args:
-            path_target: The
-            path_dest: path_dest
         Return:
             path to the file or directory
         """
@@ -115,6 +113,7 @@ class Storage:
 
 class File(Storage):
     """zhongkui basic file class"""
+
     def __init__(self, file_path, temporary=False):
         """
         Args:
@@ -270,10 +269,10 @@ class File(Storage):
             self._is_probably_packed = self.getPefile().get(
                 PEFILE.ISPROBABLYPACKED)
 
-        # elf
-        if self.fileType in FILETYPE.LINUXELF:
-            # TODO: add pyelftools to calculate entropy
-            raise NotImplementedError
+        # # elf
+        # if self.fileType in FILETYPE.LINUXELF:
+        #     # TODO: add pyelftools to calculate `section` entropy
+        #     raise NotImplementedError
 
         # others
         total_file_data = self.fileData
@@ -341,7 +340,11 @@ class File(Storage):
             self._basic_info = asdict(basic_info)
 
         return self._basic_info
-    
+
     def getAllInfo(self) -> Dict[str, Any]:
         """file all info"""
-        # TODO: add all info
+        infos = {}
+        infos[STATICINFO.BASIC] = self.getBasicInfo()
+        infos[STATICINFO.PE] = self.getPefile()
+        infos[STATICINFO.DIEC] = self.getDiec()
+        infos[STATICINFO.EXIFTOOL] = self.getExiftool()

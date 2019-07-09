@@ -35,6 +35,8 @@ class EXIFTOOL:
     FILETYPE = "FileType"
     FILETYPEEXTENSION = "FileTypeExtension"
 
+
+@dataclass
 class FileinfoBasic:
     name: str = field(default="")
     md5: str = field(default="")

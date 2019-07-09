@@ -10,8 +10,8 @@ from subprocess import Popen, PIPE, TimeoutExpired
 from pathlib import Path
 from typing import Dict
 from dataclasses import asdict
-from .exceptions import ZhongkuiScanError, ZhongkuiUnpackError
-from .model import (PEfileInfo, PESection, PEImport, FILETYPE)
+from .exceptions import ZhongkuiScanError
+from .model import PEfileInfo, PESection, PEImport
 
 log = logging.getLogger(__name__)
 
