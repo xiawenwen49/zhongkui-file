@@ -50,7 +50,7 @@ setup(
     description="Zhongkui file utils package",
     keywords="Zhongkui file",
     license="MIT",
-    python_requires=">=3.7.3",
+    python_requires=">=3.7.1",
     packages=find_packages('src/python'),
     package_dir={'': 'src/python'},
     include_package_data=True,
