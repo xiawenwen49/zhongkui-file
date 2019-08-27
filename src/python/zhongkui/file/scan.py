@@ -166,12 +166,15 @@ def tridScan(target: Path) -> Dict[str, str]:
 
     try:
         stdout = stdout.decode('utf-8', errors='ignore')
-        for line in stdout.splitlines()[6:]:
+        for line in stdout.splitlines():
+            if "%" not in line:
+                continue
+
             line_split = line.split('(')
             val = line_split[0].strip()
-            key = line_split[1].split(')')[1]
+            key = line_split[1].split(')')[1].strip()
             results.update({key: val})
-    except Exception as e:
+    except BaseException as e:
         log.error("tridScan parse error: {}".format(e))
         raise ZhongkuiScanError("tridScan parse error: {}".format(e))
 
