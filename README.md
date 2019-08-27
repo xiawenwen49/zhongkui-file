@@ -2,6 +2,16 @@
 
 zhongkui file utils package
 
+## Relases
+
+- 1.0.3
+
+```shell
+2018-08-23 release
+fixed isProbablyPacked
+```
+
+
 ## Getting Started
 
 ```shell
