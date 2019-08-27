@@ -4,6 +4,13 @@ zhongkui file utils package
 
 ## Relases
 
+- 1.0.4
+
+```shell
+2018-08-23 release
+fix tridScan parse error
+```
+
 - 1.0.3
 
 ```shell
