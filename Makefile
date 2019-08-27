@@ -1,10 +1,7 @@
 REPO=harbor.kongkongss.com
 ORG=zhongkui
 NAME=file
-CATEGORY=core
 VERSION=1.0.2
-MALWARE=test/malware
-NOT_MALWARE=test/not.malware
 
 
 all: build
@@ -13,11 +10,10 @@ all: build
 build:
 	docker build -t $(REPO)/$(ORG)/$(NAME):$(VERSION) ./docker/
 
-.PHONY: test
-test:
+.PHONY: dev
+dev:
 	echo "===> Run $(NAME)"
-	# docker run --name $(NAME) -it -v ${PWD}:/zhongkui $(REPO)/$(ORG)/$(NAME):$(VERSION) /bin/bash
-	docker run --name $(NAME) -it -v ${PWD}/tests/sample:/malware  $(REPO)/$(ORG)/$(NAME):$(VERSION) /bin/bash
+	docker run --name $(NAME) -it -v ${PWD}:/zhongkui/file $(REPO)/$(ORG)/$(NAME):$(VERSION) /bin/bash
 	docker attach $(NAME)
 
 .PHONY: stop
