@@ -268,6 +268,8 @@ class File(Storage):
         if self.fileType in FILETYPE.WINEXE:
             self._is_probably_packed = self.getPefile().get(
                 PEFILE.ISPROBABLYPACKED)
+            
+            return self._is_probably_packed
 
         # # elf
         # if self.fileType in FILETYPE.LINUXELF:
@@ -275,7 +277,7 @@ class File(Storage):
         #     raise NotImplementedError
 
         # others
-        total_file_data = self.fileData
+        total_file_data = len(self.fileData)
         total_compressed_data = 0
 
         for data in self.getChunks():

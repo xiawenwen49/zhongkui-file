@@ -28,7 +28,7 @@ class TestStorage(unittest.TestCase):
 class TestFile(unittest.TestCase):
     @classmethod
     def setUpClass(self):
-        self.file = File(MALWARE.joinpath("pe_upx"))
+        self.file = File(MALWARE.joinpath("pe"))
 
     def test_isValid(self):
         assert self.file.isValid()
