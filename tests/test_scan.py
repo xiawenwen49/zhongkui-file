@@ -1,5 +1,6 @@
 import unittest
 from pathlib import Path
+from zhongkui.logging import initConsoleLogging
 from zhongkui.file.scan import (diecScan, ssdeepScan, exiftoolScan, tridScan,
                                 magicScan, pefileScan)
 
@@ -8,6 +9,10 @@ RESULT = Path(__file__).resolve().parent.joinpath("result")
 
 
 class TestFileScan(unittest.TestCase):
+    @classmethod
+    def setUp(cls):
+        initConsoleLogging()
+
     def test_diecScan(self):
         target = MALWARE.joinpath("pe_upx")
         expect = {
@@ -69,11 +74,19 @@ class TestFileScan(unittest.TestCase):
     def test_tridScan(self):
         target = MALWARE.joinpath("pe")
         expect = {
-            " InstallShield setup ": "53.9%",
-            " Win32 Executable Delphi generic ": "17.7%",
-            " DOS Borland compiled Executable ": "12.5%",
-            " Win32 Executable ": "5.6%",
-            " Win16/32 Executable Delphi generic ": "2.5%"
+            "InstallShield setup": "53.9%",
+            "Win32 Executable Delphi generic": "17.7%",
+            "DOS Borland compiled Executable": "12.5%",
+            "Win32 Executable": "5.6%",
+            "Win16/32 Executable Delphi generic": "2.5%"
+        }
+        self.assertDictEqual(tridScan(target), expect)
+
+    def test_tridScan_html(self):
+        target = MALWARE.joinpath("html")
+        expect = {
+            "HyperText Markup Language with DOCTYPE": "80.6%",
+            "HyperText Markup Language": "19.3%"
         }
         self.assertDictEqual(tridScan(target), expect)
 
