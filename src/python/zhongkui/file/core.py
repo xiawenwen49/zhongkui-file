@@ -4,6 +4,8 @@ import shutil
 import hashlib
 import binascii
 import tempfile
+import logging
+import pefile
 from pathlib import Path
 from collections import Counter
 from dataclasses import asdict
@@ -13,6 +15,8 @@ from .model import (DIEC, PEFILE, FILETYPE, EXIFTOOL, STATICINFO,
                     FileinfoBasic)
 from .scan import (exiftoolScan, ssdeepScan, magicScan, pefileScan, tridScan,
                    diecScan)
+
+log = logging.getLogger(__name__)
 
 FILE_CHUNK_SIZE = 16 * 1024 * 1024
 
@@ -31,7 +35,7 @@ class Storage:
     @staticmethod
     def getFilenameFromPath(path: Path) -> str:
         return Path(path).name
-        
+
     @staticmethod
     def tempPut(content, path: Path = None) -> Path:
         """Store a temporary file or files.
@@ -192,6 +196,14 @@ class File(Storage):
         self._sha512 = sha512.hexdigest()
 
     @property
+    def parse(self):
+        if self.fileType in FILETYPE.WINEXE:
+            return pefile.PE(self.file_path)
+        else:
+            raise NotImplementedError("only support PE format")
+        # TODO add elf and android
+
+    @property
     def fileName(self):
         return Path(self.file_path).name
 
@@ -268,7 +280,7 @@ class File(Storage):
         if self.fileType in FILETYPE.WINEXE:
             self._is_probably_packed = self.getPefile().get(
                 PEFILE.ISPROBABLYPACKED)
-            
+
             return self._is_probably_packed
 
         # # elf

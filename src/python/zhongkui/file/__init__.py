@@ -1,4 +1,4 @@
 """zhongkui file package"""
-from .base import File, Storage
+from .core import File, Storage
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
