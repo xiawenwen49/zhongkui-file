@@ -15,20 +15,33 @@ from .model import (DIEC, PEFILE, FILETYPE, EXIFTOOL, STATICINFO,
                     FileinfoBasic)
 from .scan import (exiftoolScan, ssdeepScan, magicScan, pefileScan, tridScan,
                    diecScan)
+from .utils import Singleton
 
 log = logging.getLogger(__name__)
 
 FILE_CHUNK_SIZE = 16 * 1024 * 1024
 
 
-def temppath():
-    """Returns temporary directory."""
-    tmppath = Path(tempfile.gettempdir()).joinpath("zhongkui-tmp")
+class TempPath(metaclass=Singleton):
+    temppath = None
 
-    if not tmppath.exists():
-        os.mkdir(tmppath)
+    @classmethod
+    def set(cls, tmp_path):
+        temppath = Path(tmp_path)
+        if not temppath.exists():
+            os.makedirs(temppath)
 
-    return tmppath
+        cls.temppath = temppath
+
+    @classmethod
+    def get(cls):
+        if cls.temppath is None:
+            temppath = Path(tempfile.gettempdir()).joinpath("zhongkui-tmp")
+            if not temppath.exists():
+                os.makedirs(temppath)
+            cls.temppath = temppath
+
+        return cls.temppath
 
 
 class Storage:
@@ -46,7 +59,7 @@ class Storage:
             filepath
         """
         fd, filepath = tempfile.mkstemp(
-            prefix="upload_", dir=path or temppath())
+            prefix="upload_", dir=path or TempPath.get())
 
         if hasattr(content, "read"):
             chunk = content.read(1024)
@@ -70,7 +83,7 @@ class Storage:
             full path to the temporary file
         """
         filename = Storage.getFilenameFromPath(filename)
-        dirpath = tempfile.mkdtemp(dir=path or temppath())
+        dirpath = tempfile.mkdtemp(dir=path or TempPath.get())
         Storage.create(dirpath, filename, content)
         return Path(dirpath).joinpath(filename)
 
