@@ -26,8 +26,8 @@ class PEFILE:
 
 
 class FILETYPE:
-    WINEXE = ("Win32 EXE", "Win32 DLL", "Win64 DLL", "Win64 EXE")
-    LINUXELF = ("ELF executable", "ELF shared library")
+    PE = ("Win32 EXE", "Win32 DLL", "Win64 DLL", "Win64 EXE")
+    ELF = ("ELF executable", "ELF shared library")
 
 
 class EXIFTOOL:

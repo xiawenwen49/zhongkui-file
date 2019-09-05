@@ -34,7 +34,7 @@ class TempPath(metaclass=Singleton):
         cls.temppath = temppath
 
     @classmethod
-    def get(cls):
+    def get(cls, prefix=None):
         if cls.temppath is None:
             temppath = Path(tempfile.gettempdir()).joinpath("zhongkui-tmp")
             if not temppath.exists():
@@ -210,7 +210,7 @@ class File(Storage):
 
     @property
     def parse(self):
-        if self.fileType in FILETYPE.WINEXE:
+        if self.fileType in FILETYPE.PE:
             return pefile.PE(self.file_path)
         else:
             raise NotImplementedError("only support PE format")
@@ -290,14 +290,14 @@ class File(Storage):
             return True
 
         # pe
-        if self.fileType in FILETYPE.WINEXE:
+        if self.fileType in FILETYPE.PE:
             self._is_probably_packed = self.getPefile().get(
                 PEFILE.ISPROBABLYPACKED)
 
             return self._is_probably_packed
 
         # # elf
-        # if self.fileType in FILETYPE.LINUXELF:
+        # if self.fileType in FILETYPE.ELF:
         #     # TODO: add pyelftools to calculate `section` entropy
         #     raise NotImplementedError
 
@@ -335,7 +335,7 @@ class File(Storage):
 
     def getPefile(self):
         """pefile info"""
-        if self.fileType in FILETYPE.WINEXE:
+        if self.fileType in FILETYPE.PE:
             if self._pefile is None:
                 self._pefile = pefileScan(self.file_path)
         return self._pefile
