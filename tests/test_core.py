@@ -3,7 +3,7 @@ import tempfile
 import json
 from pathlib import Path
 from zhongkui.logging import initConsoleLogging
-from zhongkui.file.base import File, Storage
+from zhongkui.file import File, Storage
 
 MALWARE = Path(__file__).resolve().parent.joinpath("sample")
 RESULT = Path(__file__).resolve().parent.joinpath("result")
