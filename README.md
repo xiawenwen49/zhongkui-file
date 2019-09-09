@@ -4,17 +4,23 @@ zhongkui file utils package
 
 ## Relases
 
+- 1.0.5
+```shell
+2019-09-07
+add TempPath
+```
+
 - 1.0.4
 
 ```shell
-2018-08-23 release
+2019-08-23 release
 fix tridScan parse error
 ```
 
 - 1.0.3
 
 ```shell
-2018-08-23 release
+2019-08-23 release
 fixed isProbablyPacked
 ```
 
