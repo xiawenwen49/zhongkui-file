@@ -100,6 +100,7 @@ latest version is avaiable in [pypi](https://pypi.org/project/zhongkui-file/)
 - add `pyelftools` to calculate `section` entropy of `elf`
 - parse `apk`
 - parse `elf`
+- add `stringsifter` to parse string
 
 ## Authors
 
