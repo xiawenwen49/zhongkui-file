@@ -57,6 +57,6 @@ setup(
     namespace_packages=['zhongkui'],
     cmdclass={"test": PyTest},
     install_requires=[
-        "file-magic >= 0.4.0", "pefile >= 2019.4.18", "pytest", "stringsifter",
+        "file-magic >= 0.4.0", "pefile >= 2019.4.18", "pytest",
         "zhongkui-logging"
     ])
