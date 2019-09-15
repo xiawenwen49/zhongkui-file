@@ -11,8 +11,8 @@ zhongkui file analysis package
 $ git clone ssh://git@git.kongkongss.com:222/jyker/zhongkui-file.git
 $ cd zhongkui-file
 $ make dev
-# in docker
-$ pip install zhongkui-file
+# in docker `run as developer`
+$ pip install zhongkui-file -e .
 ```
 
 ## Getting Started
