@@ -1,29 +1,19 @@
 # zhongkui-file
 
-zhongkui file utils package
+zhongkui file analysis package
 
-## Relases
 
-- 1.0.5
-```shell
-2019-09-07
-add TempPath
+## Installation
+
+- run zhongkui-file in docker
+
+```bash
+$ git clone ssh://git@git.kongkongss.com:222/jyker/zhongkui-file.git
+$ cd zhongkui-file
+$ make dev
+# in docker `run as developer`
+$ pip install zhongkui-file -e .
 ```
-
-- 1.0.4
-
-```shell
-2019-08-23 release
-fix tridScan parse error
-```
-
-- 1.0.3
-
-```shell
-2019-08-23 release
-fixed isProbablyPacked
-```
-
 
 ## Getting Started
 
@@ -64,43 +54,22 @@ fixed isProbablyPacked
 }
 ```
 
-### Prerequisites
-
-- ubuntu >= 18.04
-- python >= 3.7.3
-
-details in `docker/Dockerfile`;
-
-### Installing
-
-`pip install zhongkui-file`
-
-or use docker (`>=18.09.5`)
-
-```shell
-$ git clone ssh://git@git.kongkongss.com:222/jyker/zhongkui-file.git
-$ cd zhongkui-file
-$ make build
-$ make test
-```
-[How to use our harbor](https://www.kongkongss.com/pages/viewpage.action?pageId=65835)
 
 ## Running the tests
 
 ```shell
 $ cd zhongkui-file
-$ pytest
+$ pytest -s
 ```
 
-## Versioning
-latest version is avaiable in [pypi](https://pypi.org/project/zhongkui-file/)
+## Changelog
+[release Changelog](./CHANGELOG.md)
 
 ## TODOs
 
-- add `pyelftools` to calculate `section` entropy of `elf`
-- parse `apk`
-- parse `elf`
-- add `stringsifter` to parse string
+- parse `elf` [#2](https://git.kongkongss.com/jyker/zhongkui-file/issues/2)
+- add `pyelftools` to calculate `section` entropy of `elf` [#3](https://git.kongkongss.com/jyker/zhongkui-file/issues/3)
+- add `stringsifter` to parse string [#1](https://git.kongkongss.com/jyker/zhongkui-file/issues/1)
 
 ## Authors
 

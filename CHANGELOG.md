@@ -1,0 +1,24 @@
+## 1.0.5
+> 2019-09-07 release
+
+### Features
+
+- add TempPath
+
+    add singleton-like TempPath
+
+
+## 1.0.4
+> 2019-08-23 release
+
+### Bugfixes
+
+- fix tridScan parse error
+
+
+## 1.0.3
+> 2019-08-23 release
+
+### Bugfixes
+
+- fixed isProbablyPacked
