@@ -9,6 +9,7 @@ class MAGIC:
 
 
 class DIEC:
+    PROTECTOR = "protector"
     PACKER = "packer"
     COMPILER = "compiler"
     LINKER = 'linker'

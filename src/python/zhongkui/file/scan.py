@@ -122,7 +122,7 @@ def diecScan(target: Path) -> Dict[str, str]:
     if stderr:
         log.error("diecScan stderr: {}".format(stderr))
 
-    tkeys = ("packer", "compiler", 'linker')
+    tkeys = ("packer", "protector", "compiler", 'linker')
     results = {}
 
     try:

@@ -274,7 +274,11 @@ class File(Storage):
     @property
     def packer(self):
         """return file packer name and version if exit"""
-        return self.getDiec().get(DIEC.PACKER)
+        packer = self.getDiec().get(DIEC.PACKER)
+        if packer is not None:
+            return packer
+        else:
+            return self.getDiec().get(DIEC.PROTECTOR)
 
     @property
     def isProbablyPacked(self) -> bool:
