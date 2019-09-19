@@ -1,3 +1,11 @@
+## 1.0.6
+> 2019-09-19 release
+
+### Bugfixes
+
+- fix packer detect
+
+
 ## 1.0.5
 > 2019-09-07 release
 
