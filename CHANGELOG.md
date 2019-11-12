@@ -1,3 +1,10 @@
+## 1.0.7
+> 2019-11-12 release
+
+### Features
+
+- add timeStamp
+
 ## 1.0.6
 > 2019-09-19 release
 

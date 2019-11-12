@@ -58,8 +58,8 @@ class Storage:
         Return:
             filepath
         """
-        fd, filepath = tempfile.mkstemp(
-            prefix="upload_", dir=path or TempPath.get())
+        fd, filepath = tempfile.mkstemp(prefix="upload_",
+                                        dir=path or TempPath.get())
 
         if hasattr(content, "read"):
             chunk = content.read(1024)
@@ -130,7 +130,6 @@ class Storage:
 
 class File(Storage):
     """zhongkui basic file class"""
-
     def __init__(self, file_path, temporary=False):
         """
         Args:
@@ -201,8 +200,8 @@ class File(Storage):
             sha256.update(chunk)
             sha512.update(chunk)
 
-        self._crc32 = "".join(
-            "%02X" % ((crc >> i) & 0xff) for i in [24, 16, 8, 0])
+        self._crc32 = "".join("%02X" % ((crc >> i) & 0xff)
+                              for i in [24, 16, 8, 0])
         self._md5 = md5.hexdigest()
         self._sha1 = sha1.hexdigest()
         self._sha256 = sha256.hexdigest()
@@ -337,6 +336,10 @@ class File(Storage):
         """file exiftool info"""
         return self._exiftool
 
+    def getTimeStamp(self):
+        """file timesample info"""
+        return self._exiftool.get("TimeStamp")
+
     def getPefile(self):
         """pefile info"""
         if self.fileType in FILETYPE.PE:
@@ -359,14 +362,15 @@ class File(Storage):
             basic_info.name = self.fileName
             basic_info.md5 = self.md5
             basic_info.sha256 = self.sha256
-            basic_info.crc32 = self.crc32
+            # basic_info.crc32 = self.crc32
             basic_info.fileType = self.fileType
             basic_info.magic = self.getMagic()
-            basic_info.ssdeep = self.ssdeep
+            # basic_info.ssdeep = self.ssdeep
             basic_info.trid = self.getTrid()
             basic_info.packer = self.packer
             basic_info.isProbablyPacked = self.isProbablyPacked
             basic_info.fileSize = self.getExiftool().get(EXIFTOOL.FILESIZE)
+            basic_info.timeStamp = self.getTimeStamp()
             # basic_info.familyType = self.family_type
             self._basic = asdict(basic_info)
 

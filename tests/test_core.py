@@ -36,7 +36,9 @@ class TestFile(unittest.TestCase):
         assert self.file.isValid()
 
     def test_getAllInfo(self):
-        result = self.file.getAllInfo()
+        self.file.getAllInfo()
+        result = self.file.getBasicInfo()
         assert result is not None
         with open(RESULT.joinpath("fileInfo.json"), "w") as f:
             json.dump(result, f)
+            

@@ -42,16 +42,17 @@ class FileinfoBasic:
     name: str = field(default="")
     md5: str = field(default="")
     sha256: str = field(default="")
-    crc32: str = field(default="")
+    # crc32: str = field(default="")
     fileType: str = field(default="")
     magic: str = field(default="")
-    ssdeep: str = field(default="")
+    # ssdeep: str = field(default="")
     trid: Dict[str, str] = field(default_factory=dict)
     packer: str = field(default="")
     isProbablyPacked: bool = field(default=False)
-    unpackedFile: str = field(default="")
+    # unpackedFile: str = field(default="")
     fileSize: str = field(default="")
     familyType: str = field(default="")
+    timeStamp: str = field(default="")
 
 
 # pe header
