@@ -4,6 +4,8 @@
 ### Features
 
 - add timeStamp
+- rm ssdeep
+- rm crc32
 
 ## 1.0.6
 > 2019-09-19 release
