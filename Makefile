@@ -1,20 +1,23 @@
-REPO=harbor.kongkongss.com
-ORG=zhongkui
-NAME=file
-VERSION=1.0.2
+ORG=zhongkuiai
+NAME=zhongkui-file
+VERSION=1.0.8
 
 
 all: build
 
 .PHONY: build
 build:
-	docker build -t $(REPO)/$(ORG)/$(NAME):$(VERSION) ./docker/
+	docker build -t $(ORG)/$(NAME):$(VERSION) .
 
 .PHONY: dev
 dev:
 	echo "===> Run $(NAME)"
-	docker run --name $(NAME) -it -v ${PWD}:/zhongkui/file $(REPO)/$(ORG)/$(NAME):$(VERSION) /bin/bash
-	docker attach $(NAME)
+	docker run --name $(NAME) -itd -v ${PWD}:/zhongkui/file $(ORG)/$(NAME):$(VERSION) /bin/bash
+	docker exec -it $(NAME) /bin/bash
+
+.PHONY: attach
+attach:
+	docker exec -it $(NAME) /bin/bash
 
 .PHONY: stop
 stop: ## Kill running docker containers
@@ -22,7 +25,7 @@ stop: ## Kill running docker containers
 
 clean:
 	# docker rm -f $(NAME) || true
-	# docker image rm $(REPO)/$(ORG)/$(NAME):$(VERSION)
+	# docker image rm $(ORG)/$(NAME):$(VERSION)
 	docker volumes prune
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html

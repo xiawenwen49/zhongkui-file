@@ -1,1 +1,0 @@
-FROM harbor.kongkongss.com/zhongkui/builder:latest
