@@ -1,3 +1,11 @@
+## 1.0.8
+> 2019-11-19 release
+
+### Features
+
+- add getFileSize
+- rm fileSize
+
 ## 1.0.7
 > 2019-11-12 release
 
