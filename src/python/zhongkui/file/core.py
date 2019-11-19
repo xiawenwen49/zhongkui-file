@@ -231,10 +231,6 @@ class File(Storage):
         return self._file_data
 
     @property
-    def fileSize(self):
-        return os.path.getsize(self.file_path)
-
-    @property
     def md5(self):
         if self._md5 is None:
             self.calcHashes()
@@ -319,6 +315,12 @@ class File(Storage):
             self._is_probably_packed = False
 
         return self._is_probably_packed
+    
+    def getFileSize(self, easy_read=True):
+        if easy_read:
+            return self.getExiftool().get(EXIFTOOL.FILESIZE)
+        else:
+            return os.path.getsize(self.file_path)
 
     def getTrid(self):
         """file component info"""
@@ -369,7 +371,7 @@ class File(Storage):
             basic_info.trid = self.getTrid()
             basic_info.packer = self.packer
             basic_info.isProbablyPacked = self.isProbablyPacked
-            basic_info.fileSize = self.getExiftool().get(EXIFTOOL.FILESIZE)
+            basic_info.fileSize = self.getFileSize()
             basic_info.timeStamp = self.getTimeStamp()
             # basic_info.familyType = self.family_type
             self._basic = asdict(basic_info)
