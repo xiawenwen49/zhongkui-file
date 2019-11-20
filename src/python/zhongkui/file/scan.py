@@ -25,7 +25,6 @@ def exiftoolScan(target: Path) -> Dict[str, str]:
     Return:
         A dict result
     '''
-    log.info("start exftoolScan...")
     # ? http://owl.phy.queensu.ca/~phil/exiftool/exiftool_pod.html#Input-output-text-formatting
     # -charset [[TYPE=]CHARSET]        Specify encoding for special characters
     # -j[[+]=JSONFILE] (-json)         Export/import tags in JSON format
@@ -62,6 +61,7 @@ def exiftoolScan(target: Path) -> Dict[str, str]:
     for key in ignores:
         results.pop(key, [])
 
+    log.info("finish exftoolScan...")
     return results
 
 
@@ -74,7 +74,6 @@ def ssdeepScan(target: Path) -> Dict[str, str]:
     Return:
         A dict result
     '''
-    log.info("start ssdeepScan...")
     # ? ssdeep -h
     # -c - Prints output in CSV format
     args = ('ssdeep', '-c', target)
@@ -97,7 +96,8 @@ def ssdeepScan(target: Path) -> Dict[str, str]:
     except Exception as e:
         log.error("ssdeepScan parse error: {}".format(e))
         raise ZhongkuiScanError("ssdeepScan parse error: {}".format(e))
-
+    
+    log.info("finish ssdeepScan...")
     return results
 
 
@@ -110,7 +110,6 @@ def diecScan(target: Path) -> Dict[str, str]:
     Return:
         A dict result
     '''
-    log.info("start diecScan...")
     args = ('diec', target)
     proc = Popen(args, stdout=PIPE)
     try:
@@ -137,7 +136,8 @@ def diecScan(target: Path) -> Dict[str, str]:
     except Exception as e:
         log.error("diecScan parse error: {}".format(e))
         raise ZhongkuiScanError("diecScan parse error: {}".format(e))
-
+    
+     log.info("finish diecScan...")
     return results
 
 
@@ -150,7 +150,6 @@ def tridScan(target: Path) -> Dict[str, str]:
     Return:
         A dict result
     '''
-    log.info("start tridScan...")
     args = ('trid', target)
     proc = Popen(args, stdout=PIPE)
     try:
@@ -178,6 +177,8 @@ def tridScan(target: Path) -> Dict[str, str]:
         log.error("tridScan parse error: {}".format(e))
         raise ZhongkuiScanError("tridScan parse error: {}".format(e))
 
+     log.info("finish tridScan...")
+
     return results
 
 
@@ -189,6 +190,7 @@ def magicScan(target: Path) -> Dict[str, str]:
         A dict result
     '''
     detected = magic.detect_from_filename(target)
+    log.info("finish magicScan...")
 
     return {
         "mime_type": detected.mime_type,

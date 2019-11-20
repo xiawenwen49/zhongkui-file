@@ -289,11 +289,11 @@ class File(Storage):
             return True
 
         # pe
-        if self.fileType in FILETYPE.PE:
-            self._is_probably_packed = self.getPefile().get(
-                PEFILE.ISPROBABLYPACKED)
+        # if self.fileType in FILETYPE.PE:
+        #     self._is_probably_packed = self.getPefile().get(
+        #         PEFILE.ISPROBABLYPACKED)
 
-            return self._is_probably_packed
+        #     return self._is_probably_packed
 
         # # elf
         # if self.fileType in FILETYPE.ELF:
