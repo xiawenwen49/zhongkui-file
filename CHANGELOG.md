@@ -1,3 +1,10 @@
+## 1.0.9
+> 2019-11-20 release
+
+### Bugfixes
+
+- fix isProbablyPacked
+
 ## 1.0.8
 > 2019-11-19 release
 
