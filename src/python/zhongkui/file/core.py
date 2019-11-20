@@ -11,7 +11,7 @@ from collections import Counter
 from dataclasses import asdict
 from typing import Dict, Any
 from .exceptions import ZhongkuiCriticalError
-from .model import (DIEC, PEFILE, FILETYPE, EXIFTOOL, STATICINFO,
+from .model import (DIEC, FILETYPE, EXIFTOOL, STATICINFO,
                     FileinfoBasic)
 from .scan import (exiftoolScan, ssdeepScan, magicScan, pefileScan, tridScan,
                    diecScan)

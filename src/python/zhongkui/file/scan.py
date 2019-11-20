@@ -1,9 +1,7 @@
-import os
 import logging
 import json
 import magic
 import pefile
-import tempfile
 from peutils import is_probably_packed
 from datetime import datetime
 from subprocess import Popen, PIPE, TimeoutExpired
@@ -137,7 +135,7 @@ def diecScan(target: Path) -> Dict[str, str]:
         log.error("diecScan parse error: {}".format(e))
         raise ZhongkuiScanError("diecScan parse error: {}".format(e))
     
-     log.info("finish diecScan...")
+    log.info("finish diecScan...")
     return results
 
 
@@ -177,8 +175,7 @@ def tridScan(target: Path) -> Dict[str, str]:
         log.error("tridScan parse error: {}".format(e))
         raise ZhongkuiScanError("tridScan parse error: {}".format(e))
 
-     log.info("finish tridScan...")
-
+    log.info("finish tridScan...")
     return results
 
 
