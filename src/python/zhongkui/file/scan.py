@@ -94,7 +94,7 @@ def ssdeepScan(target: Path) -> Dict[str, str]:
     except Exception as e:
         log.error("ssdeepScan parse error: {}".format(e))
         raise ZhongkuiScanError("ssdeepScan parse error: {}".format(e))
-    
+
     log.info("finish ssdeepScan...")
     return results
 
@@ -126,6 +126,11 @@ def diecScan(target: Path) -> Dict[str, str]:
         stdout = stdout.decode('utf-8', errors='ignore')
         for line in stdout.splitlines():
             line_split = line.split(':')
+            # fix https://git.kongkongss.com/zhongkui/zhongkui-file/issues/4
+            # decoding error
+            if len(line_split) < 3:
+                continue
+
             key = line_split[1].strip()
             if key in tkeys:
                 val = [v.strip() for v in line_split[2:]]  # combine val
@@ -134,7 +139,7 @@ def diecScan(target: Path) -> Dict[str, str]:
     except Exception as e:
         log.error("diecScan parse error: {}".format(e))
         raise ZhongkuiScanError("diecScan parse error: {}".format(e))
-    
+
     log.info("finish diecScan...")
     return results
 
@@ -168,8 +173,15 @@ def tridScan(target: Path) -> Dict[str, str]:
                 continue
 
             line_split = line.split('(')
+            if len(line_split) < 2:
+                continue
+
+            key_split = line_split[1].split(')')
+            if len(key_split) < 2:
+                continue
+
             val = line_split[0].strip()
-            key = line_split[1].split(')')[1].strip()
+            key = key_split[1].strip()
             results.update({key: val})
     except BaseException as e:
         log.error("tridScan parse error: {}".format(e))
@@ -217,8 +229,8 @@ def pefileScan(target: Path) -> Dict[str, str]:
         # parse sections
         for section in pe.sections:
             sec_info = PESection()
-            sec_info.name = bytes(
-                [i for i in section.Name if i != 0]).decode("utf-8")
+            sec_info.name = bytes([i for i in section.Name
+                                   if i != 0]).decode("utf-8")
             sec_info.virtualAddress = str(section.VirtualAddress)
             sec_info.virtualSize = str(section.Misc_VirtualSize)
             sec_info.rawSize = str(section.SizeOfRawData)

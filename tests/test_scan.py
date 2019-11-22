@@ -23,6 +23,11 @@ class TestFileScan(unittest.TestCase):
 
         self.assertDictEqual(expect, diecScan(target))
 
+    def test_diecScan_elf(self):
+        target = MALWARE.joinpath("elf")
+        expect_packer = "UPX(3.91)[NRV,brute]"
+        self.assertEqual(expect_packer, diecScan(target).get("packer"))
+
     def test_ssdeepScan(self):
         target = MALWARE.joinpath("pe")
         expect = {
