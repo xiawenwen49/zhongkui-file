@@ -2,4 +2,4 @@
 from .core import File, Storage, TempPath
 from .model import FILETYPE
 
-__version__ = "1.0.9"
+__version__ = "1.1.0"

@@ -1,3 +1,11 @@
+## 1.1.0
+> 2019-11-22 release
+
+### Bugfixes
+
+- fix diecScan
+
+
 ## 1.0.9
 > 2019-11-20 release
 
