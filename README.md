@@ -8,7 +8,7 @@ zhongkui file analysis package
 - run zhongkui-file in docker
 
 ```bash
-$ git clone ssh://git@git.kongkongss.com:222/jyker/zhongkui-file.git
+$ git clone git@git.kongkongss.com:zhongkui/zhongkui-file.git
 $ cd zhongkui-file
 $ make dev
 # in docker `run as developer`
