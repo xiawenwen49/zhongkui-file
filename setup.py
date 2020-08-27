@@ -34,5 +34,5 @@ setup(name="zhongkui-file",
       namespace_packages=['zhongkui'],
       install_requires=[
           "file-magic >= 0.4.0", "pefile >= 2019.4.18", "pytest",
-          "zhongkui-logging"
+          "jyk-logging"
       ])
