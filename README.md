@@ -10,7 +10,9 @@ zhongkui file analysis package
 ```bash
 $ git clone git@git.kongkongss.com:zhongkui/zhongkui-file.git
 $ cd zhongkui-file
+$ make build
 $ make dev
+$ cd file
 # in docker `run as developer`
 $ pip install zhongkui-file -e .
 ```
